@@ -10,13 +10,13 @@ mconnect() ;
 
 
 // app.use(cp());
-// app.use(cors());
-// app.use(dy.json());
-// app.use(dy.urlencoded({ extended: true }));
+app.use(cors());
+app.use(dy.json());
+app.use(dy.urlencoded({ extended: true }));
  
 
 app.get('/' , (req,res) => {
-    res.send("hi7") ;
+    res.send("hi8") ;
 })
  
 

@@ -16,7 +16,7 @@ app.use(dy.urlencoded({ extended: true }));
  
 
 app.get('/' , (req,res) => {
-    res.send("hi9") ;
+    res.send("hi1") ;
 })
  
 
@@ -26,7 +26,7 @@ app.use('/', require('./router/login'));
 app.use('/', require('./router/sign_in'));
 app.use('/', require('./router/data'));
 app.use('/', require('./router/get-cart')); 
-
+app.use('/', require('./router/payment')); 
 
 app.listen(800 , () => {
     console.log("listening") ;

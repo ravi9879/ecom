@@ -16,7 +16,7 @@ mconnect() ;
  
 
 app.get('/' , (req,res) => {
-    res.send("hi2") ;
+    res.send("hi3") ;
 })
 
 

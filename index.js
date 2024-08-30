@@ -1,4 +1,7 @@
 const express = require('express') ;
+const mconnect = require('./db')
+
+mconnect() ;
 
 const app = express() ;
 

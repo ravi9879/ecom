@@ -10,11 +10,9 @@ mconnect() ;
 
 
 // app.use(cp());
-app.use(cors({
-    // origin: "https://ecommerce-cyan-nine.vercel.app/",
-    // preflightContinue : true ,
-    // // methods: ["POST", "GET"],
-    // credentials: true
+app.use(cors({ 
+    origin: "https://ecommerce-cyan-nine.vercel.app",
+    credentials: true
 }));
 app.use(dy.json());
 app.use(dy.urlencoded({ extended: true }));

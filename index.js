@@ -10,7 +10,12 @@ mconnect() ;
 
 
 // app.use(cp());
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    preflightContinue : true ,
+    // methods: ["POST", "GET"],
+    credentials: true
+}));
 app.use(dy.json());
 app.use(dy.urlencoded({ extended: true }));
  
@@ -27,6 +32,7 @@ app.use('/', require('./router/sign_in'));
 app.use('/', require('./router/data'));
 app.use('/', require('./router/get-cart')); 
 app.use('/', require('./router/payment')); 
+app.use('/', require('./router/emptyCart')); 
 
 app.listen(800 , () => {
     console.log("listening") ;

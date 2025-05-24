@@ -13,12 +13,18 @@ const { body, validationResult } = require('express-validator');
 
 router.get('/get-cart/:user_id', async (req, res) => {
 // router.get('/studs' , async (req , res)=> {
-    try { 
+    try {  
+        const token = req.params.user_id ;  
+        // console.log(token) ;
+        const user_id = jwt.decode(token , {complete : true} ) ;
+        // console.log(user_id.payload.id) ;
+        // const f = await Cart.find({user_id : user_id.payload.id});    // finding all  data from mongo db like (select * in mysql)
         const f = await Cart.find({user_id : req.params.user_id});    // finding all  data from mongo db like (select * in mysql)
         // const f = await User.find({});    // finding all  data from mongo db like (select * in mysql)
+        // console.log(f) ;
         return res.json(f); 
     } catch (error) {
-        console.log('error');
+        console.log('error1');
     }
 });
 

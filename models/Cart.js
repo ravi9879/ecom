@@ -21,11 +21,11 @@ const Cart = new mongoose.Schema({
     user_id : {
         type : String , 
         required : true 
-    } ,
-    qty : {
-        type : Number , 
-        required : true 
-    }
+    } 
+    // qty : {
+    //     type : Number , 
+    //     required : true 
+    // }
 
 
 })

@@ -3,7 +3,8 @@ const User = require('../models/User.js');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const cookiePar = require('cookie-parser')
-const bcrypt = require('bcrypt')   
+const bcrypt = require('bcrypt');     
+// const { cookie } = require('express-validator');
 
 
 router.post('/login', async (req, res) => {
@@ -19,21 +20,19 @@ router.post('/login', async (req, res) => {
                 res.json("invalid credentials");
             }
             else {
-                const exp = Date.now() + 1000;
+                const exp = Date.now()  + 1000 ;
                 const tok = user.email_id;
-                const token = jwt.sign({id : user.email_id} , "jwt-secret-key"); 
-                const q = cookiePar.JSONCookies("token", token) ;
-                console.log(q) ;    
-                res.cookie("token", token, {
-                    expires: new Date(exp),
-                    secure: true,
-                    httpOnly: true
-                });
-                return res.send({ Status: "Success", token: tok  });
+                const token = jwt.sign({id : user.email_id} , "jwt-secret-key");  
+                res.cookie("token1", "ravi", { 
+                    expire: new Date(exp),
+                    // secure: true,
+                    // httpOnly: true
+                });   
+                return res.send({ Status: "Success", token: tok });
             }
         }
     } catch (error) {
-        console.log('error2');
+        console.log('error2' , error);
     }
 });
 

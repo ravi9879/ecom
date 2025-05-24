@@ -11,8 +11,8 @@ mconnect() ;
 
 // app.use(cp());
 app.use(cors({
-    origin: "http://localhost:5173",
-    preflightContinue : true ,
+    origin: "http://localhost:3000",
+    // preflightContinue : true ,
     // methods: ["POST", "GET"],
     credentials: true
 }));

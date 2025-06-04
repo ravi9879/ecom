@@ -3,14 +3,14 @@ const User = require('../models/User.js');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const cookiePar = require('cookie-parser')
-const bcrypt = require('bcrypt');     
+const bcrypt = require('bcrypt');
 // const { cookie } = require('express-validator');
 
 
 router.post('/login', async (req, res) => {
-    try {        
+    try {
         const { password, email_id } = req.body;
-        const user = await User.findOne({ email_id });  
+        const user = await User.findOne({ email_id });
         if (!user) {
             res.json("user does not exist");
         }
@@ -20,38 +20,38 @@ router.post('/login', async (req, res) => {
                 res.json("invalid credentials");
             }
             else {
-                const exp = Date.now()  + 1000 ;
+                const exp = Date.now() + 1000;
                 const tok = user.email_id;
-                const token = jwt.sign({id : user.email_id} , "jwt-secret-key");  
-                res.cookie("token1", "ravi", { 
-                    expire: new Date(exp),
-                    // secure: true,
-                    // httpOnly: true
-                });   
-                return res.send({ Status: "Success", token: tok });
+                const token = jwt.sign({ id: user.email_id }, "jwt-secret-key");
+                res.cookie("token", token, {
+                    httpOnly: true,
+                    // secure: true, // only on https
+                    sameSite: "lax", // or "none" if cross-site and using https
+                    maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+                });
+                return res.send({ Status: "Success" }); 
             }
         }
     } catch (error) {
-        console.log('error2' , error);
+        console.log('error2', error);
     }
-});
+}); 
 
 
-// router.get('/fetch', fetchUser, async (req, res) => {
-//     try {
-//         // let userId = req.user.id ;
-//         // const user = await Log.findById(userId).select('-password')
-//         // console.log(req.user) ;
-//         res.send("data");
+router.post('/logout', async (req, res) => {
+    try {
+        res.clearCookie("token", {
+            httpOnly: true,
+            sameSite: "lax",
+            // secure: true, // uncomment if using HTTPS in production
+        });
+        res.send({ Status: "Logged out" });
+    } catch (error) {
+        console.log('error2', error);
+    }
+}); 
 
-//         // let userId = req.user.id ;
-//         // const user = await Log.findById(userId).select('-password')
-//         // console.log(req.user) ;
-//         // res.clearCookie("token") ;
-//     } catch (error) {
-//         console.log('error');
+ 
 
-//     }
-// })
 
 module.exports = router; 

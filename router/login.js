@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
                 const token = jwt.sign({ id: user.email_id }, "jwt-secret-key");
                 res.cookie("token", token, {
                     httpOnly: true,
-                    // secure: true, // only on https
+                    secure: true, // only on https
                     sameSite: "lax", // or "none" if cross-site and using https
                     maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
                 });
@@ -43,7 +43,7 @@ router.post('/logout', async (req, res) => {
         res.clearCookie("token", {
             httpOnly: true,
             sameSite: "lax",
-            // secure: true, // uncomment if using HTTPS in production
+            secure: true, // uncomment if using HTTPS in production
         });
         res.send({ Status: "Logged out" });
     } catch (error) {

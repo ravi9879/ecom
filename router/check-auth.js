@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 router.get('/check-auth', (req, res) => { 
     try {
         // const token = req.get('Cookie')?.split('=')[1] || false 
-        const token = req.cookies.token// Get token from cookies;
+        const token = req.cookies.token || false // Get token from cookies;
         // console.log("Token from cookies:", token);
         if (!token) {
             return res.send({ loggedIn: false});

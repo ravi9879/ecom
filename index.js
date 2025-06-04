@@ -16,13 +16,9 @@ app.use(cors({
   ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-}));
-<<<<<<< HEAD
-
-app.use(cookieParser());
-=======
-app.options('*', cors());
->>>>>>> 437fa808347cd6ec2fc54e31241195b1737a7922
+})); 
+app.use(cookieParser()); 
+app.options('*', cors()); 
 app.use(dy.json());
 app.use(dy.urlencoded({ extended: true }));
 
